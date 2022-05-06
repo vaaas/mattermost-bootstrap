@@ -26,7 +26,8 @@ inside passwd root
 # mattermost-server setup
 inside git clone --depth=1 https://github.com/mattermost/mattermost-server /root/mattermost-server
 inside bash -c 'cd /root/mattermost-server && bash scripts/download_mmctl_release.sh'
-inside cp /root/mattermost-server/build/docker/postgres.conf /etc/postgres/postgres.conf
+inside cp /root/mattermost-server/build/docker/postgres.conf /etc/postgresql/14/main/postgres.conf
+inside chown postgres:postgres /etc/postgresql/14/main/postgres.conf
 cat << EOF | inside bash
 	echo "CREATE USER $PG_NAME WITH PASSWORD '$PG_PASSWORD';" | sudo -u postgres psql
 	echo "CREATE DATABASE $PG_DB;" | sudo -u postgres psql
